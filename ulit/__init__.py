@@ -1,4 +1,10 @@
+"""Simple tool to translate a piece of text cascadingly,
+in various languges."""
+
+__author__ = "Amanjeev Sethi"
+
 from yandex_translate import YandexTranslate, YandexTranslateException
+from apiclient.discovery import build
 
 
 class Ulit(YandexTranslate):
@@ -6,7 +12,7 @@ class Ulit(YandexTranslate):
     Main Ulit class
     """
 
-    hosts = {'google': YandexTranslate,
+    hosts = {'google': build,
              'yandex': YandexTranslate,}
 
     def __init__(self, host=None, api_key=None):
