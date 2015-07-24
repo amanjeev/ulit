@@ -1,3 +1,6 @@
 .idea
 *.pyc
 *.swp
+/dist/
+/*.egg-info
+/*.egg
