@@ -3,23 +3,38 @@ in various languges."""
 
 __author__ = "Amanjeev Sethi"
 
-from yandex_translate import YandexTranslate, YandexTranslateException
-from apiclient.discovery import build
+import logging
+from .yandex import Yandex
+from .google import Google
 
 
-class Ulit(YandexTranslate):
+logging.basicConfig(level=logging.DEBUG)
+
+class Ulit(object):
     """
     Main Ulit class
     """
 
-    hosts = {'google': build,
-             'yandex': YandexTranslate,}
+    _hosts = ['yandex']
 
     def __init__(self, host=None, api_key=None):
         if not host or host == "":
-            raise ValueError("Please give a host value. Possible values: " + ", ".join(lhost for lhost in self.hosts))
-        elif host not in self.hosts:
-            raise ValueError(("Unknown host %s. Possible values: " + ", ".join(lhost for lhost in self.hosts)) % host)
+            raise ValueError("Please give a host value. Possible values: "
+                             + ", ".join(lhost for lhost in self._hosts))
+        elif host not in self._hosts:
+            raise ValueError(("Unknown host %s. Possible values: "
+                              + ", ".join(lhost for lhost in self._hosts)) % host)
         else:
-            self.host = host
-            self.translate = self.hosts[self.host](api_key)
+            self._host = host
+            self._api_key = api_key
+            self.service = self._create_translation_service()
+
+    def _create_translation_service(self):
+        if self._host == 'google':
+            service = Google(self._api_key)
+        elif self._host == 'yandex':
+            service = Yandex(self._api_key)
+        else:
+            raise ValueError(("Unknown host %s. Possible values: " +
+                              ", ".join(lhost for lhost in self._hosts)) % self._host)
+        return service
