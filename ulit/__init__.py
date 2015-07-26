@@ -8,7 +8,7 @@ from .yandex import Yandex
 from .google import Google
 
 
-logging.basicConfig(level=logging.DEBUG)
+
 
 class Ulit(object):
     """
@@ -17,7 +17,7 @@ class Ulit(object):
 
     _hosts = ['yandex']
 
-    def __init__(self, host=None, api_key=None):
+    def __init__(self, host=None, api_key=None, loglevel="WARN"):
         if not host or host == "":
             raise ValueError("Please give a host value. Possible values: "
                              + ", ".join(lhost for lhost in self._hosts))
@@ -25,6 +25,7 @@ class Ulit(object):
             raise ValueError(("Unknown host %s. Possible values: "
                               + ", ".join(lhost for lhost in self._hosts)) % host)
         else:
+            logging.basicConfig(level=loglevel.upper())
             self._host = host
             self._api_key = api_key
             self.service = self._create_translation_service()

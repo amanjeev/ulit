@@ -18,10 +18,10 @@ class Yandex(BaseService):
         """ 1. Check for the text if the service thinks it is the same language as the user has provided
             2. Check if the services thinks steps are legit and there is no step that cannot be done
             3. Translate cascadingly
-            :param initial_language: two letter string of the language user needs to start with
-            :param cascade_steps: user provided steps (usually excluding the initial language)
-            :param text: the text user wants to translate cascadingly
-            :return: a tuple of all translations and the final translation in the original language
+        :param initial_language: two letter string of the language user needs to start with
+        :param cascade_steps: user provided steps (usually excluding the initial language)
+        :param text: the text user wants to translate cascadingly
+        :return: a tuple of all translations and the final translation in the original language
         """
         logging.debug(initial_language + " - " + text)
 
