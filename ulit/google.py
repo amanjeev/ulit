@@ -35,11 +35,13 @@ class Google(BaseService):
         cascade_steps = self.steps_to_execute(initial_language=initial_language,
                                               cascade_steps=cascade_steps)
         results = {}
+        orig_lang = initial_language
         for lang in cascade_steps[1:]:
             try:
-                results[lang] = self._translate(initial_language=initial_language,
+                results[lang] = self._translate(initial_language=orig_lang,
                                                 target=lang,
-                                                text=text).get("translations", "")[0].get("translatedText", "")
+                                                text=text)
+                orig_lang = lang
             except:
                 return {}
             text = results[lang]
