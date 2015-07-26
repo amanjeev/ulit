@@ -14,7 +14,7 @@ class Yandex(BaseService):
         self._service = YandexTranslate(self._api_key)
 
     def translate_cascade(self, initial_language="",
-                               cascade_steps=[], text=""):
+                          cascade_steps=[], text=""):
         """ 1. Check for the text if the service thinks it is the same language as the user has provided
             2. Check if the services thinks steps are legit and there is no step that cannot be done
             3. Translate cascadingly
@@ -53,7 +53,7 @@ class Yandex(BaseService):
         return self._service.detect(text)
 
     def check_language(self, initial_language="",
-                            text=""):
+                       text=""):
         """check whether the user provided text is in the same langauge as the
          initial langauge provided by the user
         :param initial_language: two letter string of the language user needs to start with

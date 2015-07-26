@@ -8,8 +8,6 @@ from .yandex import Yandex
 from .google import Google
 
 
-
-
 class Ulit(object):
     """
     Main Ulit class

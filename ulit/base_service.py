@@ -4,9 +4,11 @@ __author__ = "Amanjeev Sethi"
 
 import logging
 
+
 class BaseService(object):
 
-    def steps_to_execute(self, initial_language="", cascade_steps=[]):
+    @staticmethod
+    def steps_to_execute(initial_language="", cascade_steps=[]):
         """construct the final steps to execute, checks whether the original language
         is the first and the last item in the cascade_steps
         :param initial_language: two letter string of the language user needs to start with
