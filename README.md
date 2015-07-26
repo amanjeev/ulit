@@ -5,17 +5,17 @@ Ever wondered what happens when you try to translate some text of a language, st
 
 ## Example
 
-Given the steps to be followed : ['fr', 'uk', 'it', 'ru', 'pl', 'be', 'de', 'es'] and language of interest is 'en'.
+Given the steps to be followed : `['fr', 'uk', 'it', 'ru', 'pl', 'be', 'de', 'es']` and language of interest is `'en'`.
 
-Starting text in 'en': "When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity."
+Starting text in `'en'`: `"When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity."`
 
-'en' to 'fr': "Lorsque vous courtiser une jolie fille une heure semble être une seconde. Lorsque vous vous asseyez sur un rouge-chaud cinder une seconde semble une heure. C'est la relativité."
+`'en'` to `'fr'`: `"Lorsque vous courtiser une jolie fille une heure semble être une seconde. Lorsque vous vous asseyez sur un rouge-chaud cinder une seconde semble une heure. C'est la relativité."`
 
-'fr' to 'uk': 'Коли ви залицяння красивою дівчиною, годину здається секундою. Коли ви сідаєте на червоний-теплий cinder другий, здається, годину. Це в теорії відносності.'
+`'fr'` to `'uk'`: `"Коли ви залицяння красивою дівчиною, годину здається секундою. Коли ви сідаєте на червоний-теплий cinder другий, здається, годину. Це в теорії відносності."`
 
 ....
 
-Finally, 'es' to 'en': "If flirting a beautiful Girl, apparently, now the second. If She is hot and red, for a second, it seems that h in the Theory of Relativity."
+Finally, `'es'` to `'en'`: `"If flirting a beautiful Girl, apparently, now the second. If She is hot and red, for a second, it seems that h in the Theory of Relativity."`
 
 See usage section for more details.
 
