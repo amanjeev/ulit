@@ -1,29 +1,33 @@
 from setuptools import setup
-import os
-
-
-PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
-
-with open(PROJECT_DIR + '/requirements.txt') as f:
-    required = f.read().splitlines()
+from setuptools import find_packages
 
 
 def readme():
-    with open(PROJECT_DIR + '/README.md') as f:
+    with open('README.rst') as f:
         return f.read()
 
-
 setup(name="ulit",
-      version="0.1",
-      description="Translate a bunch of times and then see it become funny, almost.",
-      long_description=readme(),
-      url="",
+      version="0.1.14",
       author="Amanjeev Sethi",
       author_email="aj@amanjeev.com",
+      description="Translate a bunch of times and then see it become funny, almost.",
+      long_description=readme(),
+      url="https://github.com/amanjeev/ulit",
       license="MIT",
-      package=["ulit"],
-      install_requires=required,
-      zip_safe=False,
+      packages=find_packages(),
+      package_dir={'ulit': 'ulit'},
+      provides=['ulit'],
+      classifiers=[
+          'Intended Audience :: Developers',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 3.4',
+      ],
       test_suite='nose.collector',
       tests_require=['nose'],
+      platforms=['All'],
+      install_requires=[
+          'google-api-python-client==1.4.1',
+          'yandex.translate==0.3.5'
+      ],
       )
