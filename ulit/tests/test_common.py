@@ -9,7 +9,7 @@ class Yandex(unittest.TestCase):
 
     def setUp(self):
         self.yandex_obj = ulit.Ulit('yandex', YANDEX_API_KEY)
-        self.eng_text = "When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity."
+        self.eng_text = "Language is a process of free creation; its laws and principles are fixed, but the manner in which the principles of generation are used is free and infinitely varied. Even the interpretation and use of words involves a process of free creation."
         self.init_lang = "en"
         self.cascade_steps_working = ['fr', 'uk', 'it', 'ru', 'pl', 'be', 'de', 'es']
         self.cascade_steps_not_working = ['fr', 'uk', 'tr', 'it', 'ru']
@@ -38,4 +38,23 @@ class Yandex(unittest.TestCase):
         self.assertFalse(self.yandex_obj.service.check_cascade_steps(initial_language=self.init_lang,
                                                     cascade_steps=self.cascade_steps_not_working))
 
-    # def test_cascade_translate_works(self):
+    def test_cascade_translate_works_final(self):
+        """final translations work"""
+        all_translations_steps, final_translation = self.yandex_obj.service.translate_cascade(self.init_lang,
+                                                                                              self.cascade_steps_working,
+                                                                                              self.eng_text)
+        self.assertTrue(final_translation != "" and final_translation != None)
+
+    def test_cascade_translate_works_all(self):
+        """all steps for translations work"""
+        all_translations_steps, final_translation = self.yandex_obj.service.translate_cascade(self.init_lang,
+                                                                                              self.cascade_steps_working,
+                                                                                              self.eng_text)
+        all_t = False
+        for lang, translation in all_translations_steps:
+            if translation != "" and translation != None:
+                all_t = True
+            else:
+                all_t = False
+                break
+        self.assertTrue(all_t)
