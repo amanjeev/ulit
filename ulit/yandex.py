@@ -13,8 +13,8 @@ class Yandex(BaseService):
         self._api_key = api_key
         self._service = YandexTranslate(self._api_key)
 
-    def translate_cascade(self, initial_language="",
-                          cascade_steps=[], text=""):
+    def translate_cascade(self, initial_language,
+                          cascade_steps, text):
         """ 1. Check for the text if the service thinks it is the same language as the user has provided
             2. Check if the services thinks steps are legit and there is no step that cannot be done
             3. Translate cascadingly
@@ -25,14 +25,11 @@ class Yandex(BaseService):
         """
         logging.debug(initial_language + " - " + text)
 
-        cascade_steps = self.steps_to_execute(initial_language=initial_language,
-                                              cascade_steps=cascade_steps)
-        if not self.check_language(initial_language=initial_language,
-                                   text=text):
+        cascade_steps = self.steps_to_execute(initial_language, cascade_steps)
+        if not self.check_language(initial_language, text):
             raise YandexTranslateException(501)
 
-        if not self.check_cascade_steps(initial_language=initial_language,
-                                        cascade_steps=cascade_steps):
+        if not self.check_cascade_steps(initial_language, cascade_steps):
             raise YandexTranslateException(501)
         results = {}
         for lang in cascade_steps[1:]:
@@ -52,8 +49,7 @@ class Yandex(BaseService):
         """
         return self._service.detect(text)
 
-    def check_language(self, initial_language="",
-                       text=""):
+    def check_language(self, initial_language, text):
         """check whether the user provided text is in the same langauge as the
          initial langauge provided by the user
         :param initial_language: two letter string of the language user needs to start with
@@ -74,14 +70,14 @@ class Yandex(BaseService):
         """
         return self._service.directions
 
-    def check_cascade_steps(self, initial_language="", cascade_steps=[]):
+    def check_cascade_steps(self, initial_language, cascade_steps):
         """check if steps provided by the user are allowed by the service
         :param initial_language: two letter string of the language user needs to start with
         :param cascade_steps: user provided steps (usually excluding the initial language)
         :return: boolean of whether all the translation steps are doable
         """
-        cascade_steps = self.steps_to_execute(initial_language=initial_language,
-                                              cascade_steps=cascade_steps)
+        cascade_steps = self.steps_to_execute(initial_language,
+                                              cascade_steps)
         is_cascade_achievable = False
         # checking a language with itself is not allowed
         # the first item is the initial_language

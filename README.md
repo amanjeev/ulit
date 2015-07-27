@@ -3,7 +3,7 @@
 
 Ever wondered what happens when you try to translate some text of a language, stepwise into various intermediate langauges and back into the original langauge? I know that makes little sense but here is an example.
 
-## Example
+## Example (using Yandex's API)
 
 Given the steps to be followed : `['fr', 'uk', 'it', 'ru', 'pl', 'be', 'de', 'es']` and language of interest is `'en'`.
 
