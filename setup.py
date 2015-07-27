@@ -1,12 +1,15 @@
 from setuptools import setup
+import os
 
 
-with open('requirements.txt') as f:
+PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+with open(PROJECT_DIR + '/requirements.txt') as f:
     required = f.read().splitlines()
 
 
 def readme():
-    with open('README.md') as f:
+    with open(PROJECT_DIR + '/README.md') as f:
         return f.read()
 
 

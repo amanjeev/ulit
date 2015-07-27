@@ -22,6 +22,15 @@ See usage section for more details.
 
 ## Usage
 
+Use pip to install 
+
+```
+$ pip install ulit
+
+```
+
+
+
 ```
 import ulit
 
