@@ -58,7 +58,18 @@ It is the Process, of free Creativity; its Laws and Principles do not change, bu
 
 ```
 
+## Running tests
+
+Most of it is usual but you will need to set environment variable `YANDEX_API_KEY` with your API key.
+
+```
+$ export YANDEX_API_KEY=<YOUR API KEY HERE>
+
+$ python setup.py test
+
+```
+
+
 ## TBD
 
 * Fix Google's stuff. Google blocked me from using their translate API in the first 20 minutes of the development. Apparently, they say I violated their TOS.
-* Add tests
