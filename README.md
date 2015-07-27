@@ -7,15 +7,15 @@ Ever wondered what happens when you try to translate some text of a language, st
 
 Given the steps to be followed : `['fr', 'uk', 'it', 'ru', 'pl', 'be', 'de', 'es']` and language of interest is `'en'`.
 
-Starting text in `'en'`: `"When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity."`
+Starting text in `'en'`: `"Language is a process of free creation; its laws and principles are fixed, but the manner in which the principles of generation are used is free and infinitely varied. Even the interpretation and use of words involves a process of free creation."`
 
-`'en'` to `'fr'`: `"Lorsque vous courtiser une jolie fille une heure semble être une seconde. Lorsque vous vous asseyez sur un rouge-chaud cinder une seconde semble une heure. C'est la relativité."`
+`'en'` to `'fr'`: `"La langue est un processus de création libre; ses lois et ses principes sont fixes, mais la manière dont les principes de génération sont utilisés est gratuit et infiniment variés. Même l'interprétation et de l'utilisation de mots implique un processus de création libre."`
 
-`'fr'` to `'uk'`: `"Коли ви залицяння красивою дівчиною, годину здається секундою. Коли ви сідаєте на червоний-теплий cinder другий, здається, годину. Це в теорії відносності."`
+`'fr'` to `'uk'`: `"Мова-це процес вільного творчості; його закони і принципи є фіксованими, але і як принципи побудови, використовуються безкоштовно, і нескінченно різноманітні. Навіть інтерпретація і використання слова передбачає процес створення безкоштовно."`
 
 ....
 
-Finally, `'es'` to `'en'`: `"If flirting a beautiful Girl, apparently, now the second. If She is hot and red, for a second, it seems that h in the Theory of Relativity."`
+Finally, `'es'` to `'en'`: `"It is the Process, of free Creativity; its Laws and Principles do not change, but, as the Rules Of Construction, which is free, and is infinitely diverse. The Interpretation and Use of the Word means that the Process of Creating free of charge."`
 
 See usage section for more details.
 
@@ -27,7 +27,7 @@ import ulit
 
 cascade_steps = ['fr', 'uk', 'it', 'ru', 'pl', 'be', 'de', 'es']
 initial_language = "en"
-text = "When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity."
+text = "Language is a process of free creation; its laws and principles are fixed, but the manner in which the principles of generation are used is free and infinitely varied. Even the interpretation and use of words involves a process of free creation."
 translate = ulit.Ulit("yandex", "YOUR YANDEX TRANSLATE API KEY HERE", loglevel="DEBUG")
 
 all_translations_steps, final_translation = translate.service.translate_cascade(initial_language=initial_language,
@@ -37,22 +37,23 @@ all_translations_steps, final_translation = translate.service.translate_cascade(
 
 """
 \# Output: all_translations_steps
-{   
-     'it': 'Quando si corteggiamento di una bella ragazza, ora sembra assecondare. Quando si prende il rosso e il caldo cinder secondo, sembra ora. Questo nella teoria della relatività.',
-    'ru': 'Когда он флиртует красивая девушка, теперь, кажется, второй. Когда вы берете красный и горячий cinder второй, кажется, час. Это в теории относительности.',
-    'de': 'Wenn er flirtet ein schönes Mädchen, scheint es jetzt, die zweite. Wenn Sie heiß und rot eine zweite, es scheint, dass h in der Theorie der Relativität.',
-    'es': 'Si coquetea una Chica hermosa, al parecer, ahora, la segunda. Si Ella es caliente y rojo, un segundo, parece que h en la Teoría de la Relatividad.',
-    'pl': 'Kiedy on flirtuje piękna dziewczyna, teraz wydaje się być drugi. Jeśli wziąć czerwony i gorący cinder drugie, wydaje się, godz. To w teorii względności.',
-    'en': 'If flirting a beautiful Girl, apparently, now the second. If She is hot and red, for a second, it seems that h in the Theory of Relativity.',
-    'uk': 'Коли ви залицяння красивою дівчиною, годину здається секундою. Коли ви сідаєте на червоний-теплий cinder другий, здається, годину. Це в теорії відносності.',
-    'fr': "Lorsque vous courtiser une jolie fille une heure semble être une seconde. Lorsque vous vous asseyez sur un rouge-chaud cinder une seconde semble une heure. C'est la relativité.",
-    'be': 'Калі ен фліртуе прыгожая дзяўчына, цяпер, здаецца, другі. Калі ўзяць чырвоны і гарачы бегавая-другое, здаецца, ч То ў тэорыі адноснасці.'
+
+{
+    'pl': 'Mowa jest procesem wolnego kreatywności; jego prawa i zasady są niezmienne, ale, jak i zasady budowy, są za darmo, i nieskończenie zróżnicowana. Również interpretacja i wykorzystanie słowa oznacza proces tworzenia za darmo.',
+    'it': "Il discorso è un processo di libera creatività; le sue leggi e i principi sono fissi, ma come principi di costruzione, sono utilizzati gratuitamente, e infinitamente vario. Anche l'interpretazione e l'uso della parola implica il processo di creazione di gratis.",
+    'ru': 'Речь-это процесс свободного творчества; его законы и принципы неизменны, но, как и принципы строительства, используются бесплатно, и бесконечно разнообразен. Также интерпретация и использование слова подразумевает процесс создания бесплатно.',
+    'de': 'Es ist der Prozess, der freien Kreativität; seine Gesetze und Prinzipien nicht ändern, aber, wie die Regeln der Bau -, Sie sind kostenlos, und es ist unendlich vielfältig. Auch die Interpretation und die Verwendung des Wortes bedeutet, den Prozess der Erstellung kostenlos.',
+    'fr': "La langue est un processus de création libre; ses lois et ses principes sont fixes, mais la manière dont les principes de génération sont utilisés est gratuit et infiniment variés. Même l'interprétation et de l'utilisation de mots implique un processus de création libre.",
+    'uk': 'Мова-це процес вільного творчості; його закони і принципи є фіксованими, але і як принципи побудови, використовуються безкоштовно, і нескінченно різноманітні. Навіть інтерпретація і використання слова передбачає процес створення безкоштовно.',
+    'es': 'Es el Proceso, de la libre Creatividad; sus Leyes y Principios no cambian, pero, como las Reglas De la Construcción, que es gratuita, y es infinitamente diversa. La Interpretación y el Uso de la Palabra significa que el Proceso de Creación de forma gratuita.',
+    'be': 'Гаворка-гэта працэс свабоднага творчасці; яго законы і прынцыпы нязменныя, але, як і правілы будаўніцтва, яны бясплатна, і бясконца разнастайны. Таксама інтэрпрэтацыя і выкарыстанне слова азначае працэс стварэння бясплатна.',
+    'en': 'It is the Process, of free Creativity; its Laws and Principles do not change, but, as the Rules Of Construction, which is free, and is infinitely diverse. The Interpretation and Use of the Word means that the Process of Creating free of charge.'
 }
 
 
 \# Output: final_translation
 
-If flirting a beautiful Girl, apparently, now the second. If She is hot and red, for a second, it seems that h in the Theory of Relativity.
+It is the Process, of free Creativity; its Laws and Principles do not change, but, as the Rules Of Construction, which is free, and is infinitely diverse. The Interpretation and Use of the Word means that the Process of Creating free of charge.
 """	                                            
 
 ```
