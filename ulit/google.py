@@ -12,6 +12,7 @@ class Google(BaseService):
     def __init__(self, api_key):
         self._api_key = api_key
         self._service = build('translate', 'v2', developerKey=self._api_key)
+        self.directions = self.directions()
 
     def _translate(self, initial_language, target, text):
         return self._service.translations().list(
@@ -58,7 +59,6 @@ class Google(BaseService):
         """
         pass
 
-    @property
     def directions(self):
         """Service's available translation directions
         :return: list of the available translation directions (from-to)
@@ -71,6 +71,15 @@ class Google(BaseService):
         :param initial_language: two letter string of the language user needs to start with
         :param text: the text user wants to translate cascadingly
         :return: boolean whether a language is correct
+        """
+        pass
+
+    def is_translation_step_valid(self, from_lang, to_lang):
+        """
+        If one translation step valid
+        :param from_lang: two letter string for lang
+        :param to_lang: two letter string for lang
+        :return: boolean if translation valid from_lang to to_lang
         """
         pass
 

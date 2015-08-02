@@ -45,6 +45,10 @@ class Yandex(unittest.TestCase):
                                                                                               self.eng_text)
         self.assertTrue(final_translation != "" and final_translation != None)
 
+    def test_translation_step_allow(self):
+        """en to fr is allowed"""
+        self.assertTrue(self.yandex_obj.service.is_translation_step_valid("en", "fr"))
+
     def test_cascade_translate_works_all(self):
         """all steps for translations work"""
         all_translations_steps, final_translation = self.yandex_obj.service.translate_cascade(self.init_lang,

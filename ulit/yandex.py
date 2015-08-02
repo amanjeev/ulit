@@ -12,6 +12,7 @@ class Yandex(BaseService):
     def __init__(self, api_key):
         self._api_key = api_key
         self._service = YandexTranslate(self._api_key)
+        self.directions = self.directions()
 
     def translate_cascade(self, initial_language,
                           cascade_steps, text):
@@ -63,12 +64,26 @@ class Yandex(BaseService):
             is_correct_language = False
         return is_correct_language
 
-    @property
     def directions(self):
         """Service's available translation directions
         :return: list of the available translation directions (from-to)
         """
         return self._service.directions
+
+    def is_translation_step_valid(self, from_lang, to_lang):
+        """
+        If one translation step valid
+        :param from_lang: two letter string for lang
+        :param to_lang: two letter string for lang
+        :return: boolean if translation valid from_lang to to_lang
+        """
+        lang_pair = from_lang + "-" + to_lang
+        logging.debug(lang_pair)
+        if lang_pair.strip() in self.directions:
+            valid = True
+        else:
+            valid = False
+        return valid
 
     def check_cascade_steps(self, initial_language, cascade_steps):
         """check if steps provided by the user are allowed by the service
@@ -82,9 +97,7 @@ class Yandex(BaseService):
         # checking a language with itself is not allowed
         # the first item is the initial_language
         for lang in cascade_steps[1:]:
-            language_pair = initial_language + "-" + lang
-            logging.debug(language_pair)
-            if language_pair.strip() in self.directions:
+            if self.is_translation_step_valid(initial_language, lang):
                 is_cascade_achievable = True
                 initial_language = lang
             else:
