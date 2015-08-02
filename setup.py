@@ -23,7 +23,7 @@ setup(name="ulit",
           'Programming Language :: Python',
           'Programming Language :: Python :: 3.4',
       ],
-      test_suite='nose.collector',
+      test_suite='ulit.tests',
       tests_require=['nose'],
       platforms=['All'],
       install_requires=[
