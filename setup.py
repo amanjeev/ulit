@@ -2,16 +2,17 @@ from setuptools import setup
 from setuptools import find_packages
 
 
-def readme():
-    with open('README.rst') as f:
-        return f.read()
+
+with open('README.rst') as f:
+    readme = f.read()
+
 
 setup(name="ulit",
-      version="0.2.0",
+      version="0.2.2",
       author="Amanjeev Sethi",
       author_email="aj@amanjeev.com",
-      description="Translate a bunch of times and then see it become funny, almost.",
-      long_description=readme(),
+      description="Start with some text in a langauge. Translate it stepwise using a number of intermediate langauges, and back to the one you started with. See how the original text changes.",
+      long_description=readme,
       url="https://github.com/amanjeev/ulit",
       license="MIT",
       packages=find_packages(),
@@ -26,6 +27,8 @@ setup(name="ulit",
       test_suite='ulit.tests',
       tests_require=['nose'],
       platforms=['All'],
+      keywords=['translate', 'cascade', 'repeated translations',
+                'lost in translation', 'translations', 'languages'],
       install_requires=[
           'google-api-python-client==1.4.1',
           'yandex.translate==0.3.5'

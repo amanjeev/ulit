@@ -8,7 +8,7 @@ If that makes little sense but here is an example.
 
 ## Latest version
 
-0.2.0
+0.2.2
 
 ## Pypi
 
