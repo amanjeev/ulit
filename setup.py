@@ -7,7 +7,7 @@ def readme():
         return f.read()
 
 setup(name="ulit",
-      version="0.1.14",
+      version="0.2.0",
       author="Amanjeev Sethi",
       author_email="aj@amanjeev.com",
       description="Translate a bunch of times and then see it become funny, almost.",
