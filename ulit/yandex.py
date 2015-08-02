@@ -12,7 +12,7 @@ class Yandex(BaseService):
     def __init__(self, api_key):
         self._api_key = api_key
         self._service = YandexTranslate(self._api_key)
-        self.directions = self.directions()
+        self._directions = self._directions()
 
     def translate_cascade(self, initial_language,
                           cascade_steps, text):
@@ -64,7 +64,7 @@ class Yandex(BaseService):
             is_correct_language = False
         return is_correct_language
 
-    def directions(self):
+    def _directions(self):
         """Service's available translation directions
         :return: list of the available translation directions (from-to)
         """
@@ -79,7 +79,7 @@ class Yandex(BaseService):
         """
         lang_pair = from_lang + "-" + to_lang
         logging.debug(lang_pair)
-        if lang_pair.strip() in self.directions:
+        if lang_pair.strip() in self._directions:
             valid = True
         else:
             valid = False

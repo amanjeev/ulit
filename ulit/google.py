@@ -12,7 +12,7 @@ class Google(BaseService):
     def __init__(self, api_key):
         self._api_key = api_key
         self._service = build('translate', 'v2', developerKey=self._api_key)
-        self.directions = self.directions()
+        self._directions = self._directions()
 
     def _translate(self, initial_language, target, text):
         return self._service.translations().list(
@@ -31,35 +31,32 @@ class Google(BaseService):
             :return: a tuple of all translations and the final translation in the original language
         """
         logging.debug(initial_language + " - " + text)
-
         cascade_steps = self.steps_to_execute(initial_language, cascade_steps)
+        results = {}
+        orig_lang = initial_language
+        for lang in cascade_steps[1:]:
+            try:
+                response = self._translate(orig_lang, lang, text)
+                results[lang] = response['translations'][0]['translatedText']
+                orig_lang = lang
+            except:
+                return {}
+            text = results[lang]
+            logging.debug(lang + " - " + text)
+        result = results[initial_language]
+        return (results, result)
 
-        # Chcek if they still say 'abuse detected'
-        print(self._translate("en", "fr", text))
-
-        # results = {}
-        # orig_lang = initial_language
-        # for lang in cascade_steps[1:]:
-        #     try:
-        #         results[lang] = self._translate(initial_language=orig_lang,
-        #                                         target=lang,
-        #                                         text=text)
-        #         orig_lang = lang
-        #     except:
-        #         return {}
-        #     text = results[lang]
-        #     logging.debug(lang + " - " + text)
-        # result = results[initial_language]
-        # return (results, result)
-
-    def get_language(self, text):
+    def get_language(self, text=""):
         """get the language detected by the service
            :param text: the text user wants to translate cascadingly
            :return: language detected
         """
-        pass
+        result = self._service.detections().list(
+            q=[text]
+        ).execute()
+        return result['detections'][0][0]['language']
 
-    def directions(self):
+    def _directions(self):
         """Service's available translation directions
         :return: list of the available translation directions (from-to)
         """
@@ -72,7 +69,12 @@ class Google(BaseService):
         :param text: the text user wants to translate cascadingly
         :return: boolean whether a language is correct
         """
-        pass
+        lang = self.get_language(text)
+        if lang == initial_language:
+            is_correct_language = True
+        else:
+            is_correct_language = False
+        return is_correct_language
 
     def is_translation_step_valid(self, from_lang, to_lang):
         """
@@ -81,7 +83,13 @@ class Google(BaseService):
         :param to_lang: two letter string for lang
         :return: boolean if translation valid from_lang to to_lang
         """
-        pass
+        response = self._service.languages().list(target=from_lang).execute()
+        valid = False
+        for lang in response['languages']:
+            if lang['language'] == to_lang:
+                valid = True
+                break
+        return valid
 
     def check_cascade_steps(self, initial_language, cascade_steps):
         """check if steps provided by the user are allowed by the service
@@ -89,4 +97,14 @@ class Google(BaseService):
         :param cascade_steps: user provided steps (usually excluding the initial language)
         :return: boolean of whether all the translation steps are doable
         """
-        pass
+        cascade_steps = self.steps_to_execute(initial_language,
+                                              cascade_steps)
+        is_cascade_achievable = False
+        for lang in cascade_steps[1:]:
+            if self.is_translation_step_valid(initial_language, lang):
+                is_cascade_achievable = True
+                initial_language = lang
+            else:
+                is_cascade_achievable = False
+                break
+        return is_cascade_achievable

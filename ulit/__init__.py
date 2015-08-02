@@ -13,7 +13,7 @@ class Ulit(object):
     Main Ulit class
     """
 
-    _hosts = ['yandex']
+    _hosts = ['yandex', 'google']
 
     def __init__(self, host=None, api_key=None, loglevel="WARN"):
         if not host or host == "":
