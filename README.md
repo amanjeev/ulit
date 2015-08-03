@@ -14,6 +14,14 @@ If that makes little sense but here is an example.
 
 [https://pypi.python.org/pypi/ulit/](https://pypi.python.org/pypi/ulit/)
 
+## APIs
+
+You need to get API keys for either [Google translate](https://cloud.google.com/translate/docs) or [Yandex translate](https://tech.yandex.com/translate/).
+
+
+
+
+
 
 ## Example (using Yandex's API)
 
